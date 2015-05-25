@@ -1,0 +1,222 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_UVTEX DIALOG  0, 0, 217, 150
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_UVCHANNEL_EDIT,"CustEdit",WS_GROUP | WS_TABSTOP,
+                    14,64,21,10
+    CONTROL         "U Coordinate",IDC_RCHANNEL_UVW,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,63,11,57,10
+    CONTROL         "VW Checker",IDC_RCHANNEL_CHECKER,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,63,21,57,10
+    CONTROL         "",IDC_RCOUNT_EDIT,"CustEdit",WS_TABSTOP,123,21,21,10
+    CONTROL         "V Coordinate",IDC_GCHANNEL_UVW,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,63,61,57,10
+    CONTROL         "UW Checker",IDC_GCHANNEL_CHECKER,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,63,71,57,10
+    CONTROL         "",IDC_GCOUNT_EDIT,"CustEdit",WS_TABSTOP,123,70,21,10
+    CONTROL         "W Coordinate",IDC_BCHANNEL_UVW,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,63,111,59,10
+    CONTROL         "UV Checker",IDC_BCHANNEL_CHECKER,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,63,120,55,10
+    CONTROL         "",IDC_BCOUNT_EDIT,"CustEdit",WS_TABSTOP,123,120,21,10
+    CONTROL         "",IDC_TINTAMOUNT_EDIT,"CustEdit",WS_TABSTOP,173,55,21,
+                    10
+    CONTROL         "",IDC_RCOUNT_SPIN,"SpinnerControl",0x0,145,21,7,10
+    CONTROL         "",IDC_GCOUNT_SPIN,"SpinnerControl",0x0,145,70,7,10
+    CONTROL         "",IDC_BCOUNT_SPIN,"SpinnerControl",0x0,145,120,7,10
+    CONTROL         "",IDC_UVCHANNEL_SPIN,"SpinnerControl",0x0,36,64,7,10
+    CTEXT           "UVW\nChannel:",IDC_UVCHANNEL_LABEL,14,45,29,16
+    CONTROL         "",IDC_TINTAMOUNT_SPIN,"SpinnerControl",0x0,195,55,7,10
+    LTEXT           "Tint Amount:",IDC_TINTAMOUNT_LABEL,167,45,41,8
+    GROUPBOX        "Red Channel",IDC_R_GROUP,57,2,102,46
+    GROUPBOX        "Green Channel",IDC_G_GROUP,57,51,102,46
+    GROUPBOX        "Blue Channel",IDC_B_GROUP,57,101,102,46
+    GROUPBOX        "Output",IDC_OUTPUT_GROUP,163,2,50,145
+    GROUPBOX        "Input",IDC_INPUT_GROUP,4,2,50,145
+    CONTROL         "",IDC_TINTCOLOR,"ColorSwatch",0x0,170,85,36,31
+    LTEXT           "Tint Color:",IDC_TINT_LABEL,171,75,33,8
+    CONTROL         "",IDC_BAMOUNT_EDIT,"CustEdit",WS_TABSTOP,123,133,21,10
+    CONTROL         "",IDC_BAMOUNT_SPIN,"SpinnerControl",0x0,145,133,7,10
+    LTEXT           "Blue Amount:",IDC_BAMOUNT_LABEL,64,134,43,8
+    CONTROL         "",IDC_RAMOUNT_EDIT,"CustEdit",WS_TABSTOP,123,34,21,10
+    CONTROL         "",IDC_RAMOUNT_SPIN,"SpinnerControl",0x0,145,34,7,10
+    LTEXT           "Red Amount:",IDC_RAMOUNT_LABEL,64,35,42,8
+    CONTROL         "",IDC_GAMOUNT_EDIT,"CustEdit",WS_TABSTOP,123,83,21,10
+    CONTROL         "",IDC_GAMOUNT_SPIN,"SpinnerControl",0x0,145,83,7,10
+    LTEXT           "Green Amount:",IDC_GAMOUNT_LABEL,63,83,48,8
+    CONTROL         "Clamp",IDC_CLAMPUVW,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,13,90,32,8
+    CTEXT           "Vertex Color",IDC_CHANNEL_NAME,8,77,42,8
+END
+
+IDD_ABOUT_FOO DIALOGEX 0, 0, 218, 41
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",IDC_STATIC,2,0,214,38
+    RTEXT           "0000.00.00",IDC_ABOUT_VERSION,171,26,37,8
+    PUSHBUTTON      "www.fooTOOLS.com",IDC_ABOUT_WEB,114,10,96,13,BS_CENTER |
+                    NOT WS_TABSTOP,WS_EX_STATICEDGE
+    LTEXT           "Version ...............",IDC_STATIC,115,26,57,8
+    CONTROL         103,IDC_STATIC,"Static",SS_BITMAP | SS_REALSIZEIMAGE |
+                    SS_SUNKEN,14,13,57,17
+END
+
+IDD_ABOUT_BFD DIALOG  0, 0, 218, 33
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "",IDC_STATIC,2,0,214,30
+    RTEXT           "0000.00.00",IDC_ABOUT_VERSION,174,18,37,8
+    RTEXT           "John Burnett",IDC_STATIC,171,8,40,8
+    LTEXT           "Version ...............",IDC_STATIC,118,18,57,8
+    LTEXT           "Author ..............",IDC_STATIC,118,8,52,8
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_UVTEX, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 101
+    END
+
+    IDD_ABOUT_FOO, DIALOG
+    BEGIN
+        RIGHTMARGIN, 108
+        BOTTOMMARGIN, 16
+    END
+
+    IDD_ABOUT_BFD, DIALOG
+    BEGIN
+        RIGHTMARGIN, 108
+        BOTTOMMARGIN, 8
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_FOOTOOLS            BITMAP                  "fooTOOLS_green.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_LIBDESCRIPTION      "Shade Surface Based On UVW Coordinates"
+    IDS_UVTEX_CLASSNAME     "UVW To RGB"
+    IDS_R_TYPE              "Red Channel Type"
+    IDS_G_TYPE              "Green Channel Type"
+    IDS_B_TYPE              "Blue Channel Type"
+    IDS_R_CHECKCOUNT        "Red Checker Count"
+    IDS_G_CHECKCOUNT        "Green Checker Count"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_B_CHECKCOUNT        "Blue Checker Count"
+    IDS_R_AMOUNT            "Red Channel Amount"
+    IDS_UVTEX_PARAMS        "UVW To RGB Parameters"
+    IDS_UVTEX_ROLLOUT       "UVW To RGB Parameters"
+    IDS_UVCHANNEL           "UVW Channel"
+    IDS_BRIGHTNESS          "Brightness"
+    IDS_CONTRAST            "Contrast"
+    IDS_TINTCOLOR           "Tint Color"
+    IDS_TINTAMOUNT          "Tint Amount"
+    IDS_G_AMOUNT            "Green Channel Amount"
+    IDS_B_AMOUNT            "Blue Channel Amount"
+    IDS_CLAMPUVW            "Clamp UVW"
+    IDS_CHAN_0              "Vertex Color"
+    IDS_CHAN_1              "Illumination"
+    IDS_CHAN_2              "Alpha"
+    IDS_CATEGORY_BFD        "BFDtools"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CATEGORY_FOO        "fooTOOLS"
+    IDS_VERSION             "2007.02.20"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

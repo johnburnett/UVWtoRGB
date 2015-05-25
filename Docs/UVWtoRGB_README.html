@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+	<TITLE>RGB to UVW</TITLE>
+	<STYLE TYPE="text/css">
+	<--
+		HR { color:rgb(140,140,140); height:1px; }
+		IMG { border-style:solid; border-width:1px; border-color:rgb(0,0,0); }
+		CODE { color:rgb(0,0,220); }
+		P.indent { padding:0pt 0pt 0pt 20pt }
+		DL.indent { padding:0pt 0pt 0pt 20pt }
+		DD { padding:3pt; }
+		LI { padding:3pt; }
+		LI.compact { padding:0pt; }
+		BODY { color:rgb(0,0,0); background-color:rgb(220,220,220); font-family:"Veranda","Arial","sans-serif"; font-size:10pt; }
+		A { text-decoration:none; }
+		A:link { color:rgb(0,0,150); }
+		A:visited { color:rgb(127,0,0) }
+		A:hover { background-color:rgb(255,255,0); }
+	-->
+	</STYLE>
+</HEAD>
+
+<BODY>
+
+<A NAME="top"></A>
+<H1>RGB to UVW</H1>
+<UL>
+	<LI CLASS="compact"><A HREF="#options">Options</A></LI>
+	<LI CLASS="compact"><A HREF="#bugs">Known Bugs/Limitations</A></LI>
+	<LI CLASS="compact"><A HREF="#history">History</A></LI>
+	<LI CLASS="compact"><A HREF="#contact">Contact / Disclaimer / License</A></LI>
+</UL>
+
+<HR>
+<DIV ALIGN="center">
+	<P>Uses UVW or Per-Vertex channels to shade the surface of an object.  Useful for viewing how the UV mapping flows along a surface.</P>
+	<P><IMG SRC="./images/TeapotSample.jpg" ALT="Sample Image"></P>
+</DIV>
+
+<A NAME="options"></A>
+<HR>
+<H3>Options:</H3>
+<DIV ALIGN="center">
+	<IMG SRC="./images/UI_UVWtoRGB.gif" ALT="User Interface">
+</DIV>
+<UL>
+	<LI><B>Input Group:</B>
+		<UL>
+			<LI><B>UVW Channel:</B><BR>
+				Selects which UVW channel you want to display. Note that if you're using Max4, you can set this to less than 1, in which case the number has the following meaning:
+					<UL>
+						<LI>Channel 0: Per-Vertex Colors
+						<LI>Channel -1: Per-Vertex Illumination
+						<LI>Channel -2: Per-Vertex Alpha
+					</UL>
+			</LI>
+			<LI><B>Clamp:</B><BR>
+				If on, UVW coordinates are clamped to a 0.0 -> 1.0 range (this is what the Vertex Color texture does).  Otherwise, UVW values are wrapped (ie. 1.5 becomes 0.5).
+			</LI>
+		</UL>
+	</LI>
+	<LI><B>Channel Groups:</B><BR>
+		Use these options to choose what gets stuffed into the map's color channels.
+		<UL>
+			<LI><B>U/V/W Coordinate:</B><BR>
+				Directly use the U, V, or W coordinates in the map's color channel.
+			</LI>
+			<LI><B>VW/UW/UV Checker:</B><BR>
+				Tiles a checker pattern across the object.  The spinner controls how many squares are in the checker pattern.
+			</LI>
+			<LI><B>R/G/B Amount:</B><BR>
+				Allows you to fade down the specified channel to 0.  Mostly useful to lower the Blue Amount to give the default checker pattern less contrast.
+			</LI>
+		</UL>
+	</LI>
+	<LI><B>Output Group:</B><BR>
+		Lets you adjust the brightness and contrast of the map to be easier on the eyes.
+		<UL>
+			<LI><B>Tint Amount:</B><BR>
+				How much to tint the map.
+			</LI>
+			<LI><B>Tint Color:</B><BR>
+				The color to tint towards.
+			</LI>
+		</UL>
+	</LI>
+</UL>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<A NAME="bugs"></A>
+<HR>
+<H3>Known Bugs/Limitations:</H3>
+<UL>
+	<LI>You cannot see an object's W coordinates in the viewport, though they will be visible when the object is rendered.</LI>
+	<LI>Trying to display Per-Vertex Color, Illumination, or Alpha using the texture's "Show Map In Viewport" button isn't recommended.  The display will likely not be helpful, and you'll get better results just using the standard object properties checkbox.</LI>
+</UL>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<A NAME="history"></A>
+<HR>
+<H3>History:</H3>
+<PRE>
+2000.02.07 - Created.
+2000.02.09 - Changed brightness/contrast to Tint Color and Amount (duh).
+2000.08.23 - Bug fix, added R/G/B Amount.
+2001.01.25 - Finally got around to adding "Clamp".  Ooo.
+2001.03.26 - Added support for per-vertex illuminatin and alpha in Max4.
+2007.02.20 - Updating for public 3dsmax9 release.
+2008.04.05 - Updated to 64 bit and 3dsmax 2008.  Thanks to <a href="http://www.maxplugins.de/">David Baker</a> for the help.
+</PRE>
+<P><A HREF="#top">Back To Top...</A></P>
+
+<A NAME="contact"></A>
+<HR>
+<H3>Contact / Disclaimer / License:</H3>
+Bug reports/comments/suggestions: <A HREF="http://www.footools.com/">http://www.footools.com/</A>. If you use this software on a project, sending an e-mail/postcard indicating such would be appreciated.<BR>
+<PRE>
+This software is provided 'as-is', without any express or implied warranty. In no
+event will the author be held liable for any damages arising from the use of this
+software.
+
+Permission is granted to anyone to use this software, subject to the following
+restrictions:
+
+1. The origin of this software must NOT be misrepresented; you must not claim that
+   you wrote the original software.
+
+2. This software may NOT be bundled with any other product or included in any
+   compilation without the express permission of the author.
+
+3. This notice must NOT be removed or altered from any distribution of this
+   software.
+</PRE>
+<P><A HREF="#top">Back To Top...</A></P>
+</BODY>
+</HTML>
