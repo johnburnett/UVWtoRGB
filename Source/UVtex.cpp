@@ -82,10 +82,10 @@ class UVtex : public Texmap {
 		void DiscardTexHandle();
 		BOOL SupportTexDisplay() { return TRUE; }
 		void ActivateTexDisplay(BOOL onoff);
-#if (MAX_RELEASE >= 9000)
-		DWORD_PTR GetActiveTexHandle(TimeValue t, TexHandleMaker& thmaker);
-#else
+#if MAX_VERSION_MAJOR < 9	//Max 9
 		DWORD GetActiveTexHandle(TimeValue t, TexHandleMaker& thmaker);
+#else
+		DWORD_PTR GetActiveTexHandle(TimeValue t, TexHandleMaker& thmaker);
 #endif
 		void GetUVTransform(Matrix3 &uvtrans) { uvtrans.IdentityMatrix(); }
 		int GetTextureTiling() { return (U_WRAP|V_WRAP); }
@@ -105,16 +105,31 @@ class UVtex : public Texmap {
 
  		int NumRefs() {return 1;}
 		RefTargetHandle GetReference(int i) { return pblock; }
+#if MAX_VERSION_MAJOR < 14	//Max 2012
 		void SetReference(int i, RefTargetHandle rtarg) { pblock = (IParamBlock2*)rtarg; }
-
-#if (MAX_RELEASE >= 9000) //max 9
-		RefTargetHandle Clone(RemapDir &remap = DefaultRemapDir());
-#else //max 8 and earlier
-		RefTargetHandle Clone(RemapDir &remap = NoRemap());
+#else
+private:
+		virtual void SetReference(int i, RefTargetHandle rtarg) { pblock = (IParamBlock2*)rtarg; }
+public:
 #endif
 
+#if MAX_VERSION_MAJOR < 9	//Max 9
+		RefTargetHandle Clone(RemapDir &remap = NoRemap());
+#else
+	#if MAX_VERSION_MAJOR < 14	//Max 2012
+		RefTargetHandle Clone(RemapDir &remap = DefaultRemapDir());
+	#else
+		RefTargetHandle Clone(RemapDir &remap);
+	#endif
+#endif
+
+#if MAX_VERSION_MAJOR < 17	//Max 2015
 		RefResult NotifyRefChanged( Interval changeInt, RefTargetHandle hTarget,
 		   PartID& partID, RefMessage message);
+#else
+		RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget,
+		   PartID& partID, RefMessage message, BOOL propagate);
+#endif
 
 		int	NumParamBlocks() { return 1; }
 		IParamBlock2* GetParamBlock(int i) { return pblock; }
@@ -141,10 +156,10 @@ class UVtexDlgProc:public ParamMap2UserDlgProc
 public:
 	UVtex *tex;
 	UVtexDlgProc(UVtex *t) { tex = t; }
-#if (MAX_RELEASE >= 9000)
-	INT_PTR DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam);
-#else
+#if MAX_VERSION_MAJOR < 9	//Max 9
 	BOOL DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam);
+#else
+	INT_PTR DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam);
 #endif
 	void DeleteThis() { delete this; }
 	void SetThing(ReferenceTarget *r) { tex = (UVtex*)r; }
@@ -163,10 +178,10 @@ void UVtexDlgProc::SetChannelLabel(HWND hLabel, int chan)
 	}
 }
 
-#if (MAX_RELEASE >= 9000)
-INT_PTR UVtexDlgProc::DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9	//Max 9
 BOOL UVtexDlgProc::DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
+#else
+INT_PTR UVtexDlgProc::DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	switch (msg)
@@ -180,6 +195,10 @@ BOOL UVtexDlgProc::DlgProc(TimeValue t,IParamMap2 *map,HWND hWnd,UINT msg,WPARAM
 	return FALSE;
 }
 
+#if MAX_VERSION_MAJOR < 15	//Max 2013
+ #define p_end end
+#endif
+
 static ParamBlockDesc2 uvtexpb ( uvtex_params, _T("parameters"),  0, &uvTexCD, P_AUTO_CONSTRUCT + P_AUTO_UI, 0,
 	IDD_UVTEX, IDS_UVTEX_ROLLOUT, 0, 0, NULL,
 	uv_uvchannel,	_T("uvwChannel"),	TYPE_INT,	0,	IDS_UVCHANNEL,
@@ -190,66 +209,66 @@ static ParamBlockDesc2 uvtexpb ( uvtex_params, _T("parameters"),  0, &uvTexCD, P
 		p_range,		0, (MAX_MESHMAPS-1),
 #endif
 		p_ui,			TYPE_SPINNER, EDITTYPE_INT, IDC_UVCHANNEL_EDIT, IDC_UVCHANNEL_SPIN, 1.0f,
-		end,
+		p_end,
 	uv_rtype,	_T("redType"), 	TYPE_INT,	0,	IDS_R_TYPE,
 		p_ui,			TYPE_RADIO, 2, IDC_RCHANNEL_UVW, IDC_RCHANNEL_CHECKER,
 		p_default,		CHANTYPE_COLOR,
 		p_range,		0,	1,
-		end,
+		p_end,
 	uv_gtype,	_T("greenType"), 	TYPE_INT,	0,	IDS_G_TYPE,
 		p_ui,			TYPE_RADIO, 2, IDC_GCHANNEL_UVW, IDC_GCHANNEL_CHECKER,
 		p_default,		CHANTYPE_COLOR,
 		p_range,		0,	1,
-		end,
+		p_end,
 	uv_btype,	_T("blueType"), 	TYPE_INT,	0,	IDS_B_TYPE,
 		p_ui,			TYPE_RADIO, 2, IDC_BCHANNEL_UVW, IDC_BCHANNEL_CHECKER,
 		p_default,		CHANTYPE_CHECK,
 		p_range,		0,	1,
-		end,
+		p_end,
 	uv_rcount, _T("redCheckerCount"), TYPE_INT, P_ANIMATABLE, IDS_R_CHECKCOUNT,
 		p_default,		10,
 		p_range,		1, 1000,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_INT, IDC_RCOUNT_EDIT, IDC_RCOUNT_SPIN, 1.0f,
-		end,
+		p_end,
 	uv_gcount, _T("greenCheckerCount"), TYPE_INT, P_ANIMATABLE, IDS_G_CHECKCOUNT,
 		p_default,		10,
 		p_range,		1, 1000,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_INT, IDC_GCOUNT_EDIT, IDC_GCOUNT_SPIN, 1.0f,
-		end,
+		p_end,
 	uv_bcount, _T("blueCheckerCount"), TYPE_INT, P_ANIMATABLE, IDS_B_CHECKCOUNT,
 		p_default,		10,
 		p_range,		1, 1000,
 		p_ui, 			TYPE_SPINNER, EDITTYPE_INT, IDC_BCOUNT_EDIT, IDC_BCOUNT_SPIN, 1.0f,
-		end,
+		p_end,
 	uv_tintAmount,	_T("tintAmount"), TYPE_FLOAT, P_ANIMATABLE, IDS_TINTAMOUNT,
 		p_default,		0.0f,
 		p_range,		0.0f, 1.0f,
 		p_ui,			TYPE_SPINNER, EDITTYPE_FLOAT, IDC_TINTAMOUNT_EDIT, IDC_TINTAMOUNT_SPIN, 0.01f,
-		end,
+		p_end,
 	uv_tintColor,	_T("tintColor"), TYPE_RGBA, P_ANIMATABLE, IDS_TINTCOLOR,
 		p_default,		Color(0.5f,0.5f,0.5f),
 		p_ui,			TYPE_COLORSWATCH, IDC_TINTCOLOR,
-		end,
+		p_end,
 	uv_rAmount,	_T("redAmount"), TYPE_FLOAT, P_ANIMATABLE, IDS_R_AMOUNT,
 		p_default,		1.0f,
 		p_range,		0.0f, 1.0f,
 		p_ui,			TYPE_SPINNER, EDITTYPE_FLOAT, IDC_RAMOUNT_EDIT, IDC_RAMOUNT_SPIN, 0.01f,
-		end,
+		p_end,
 	uv_gAmount,	_T("greenAmount"), TYPE_FLOAT, P_ANIMATABLE, IDS_G_AMOUNT,
 		p_default,		1.0f,
 		p_range,		0.0f, 1.0f,
 		p_ui,			TYPE_SPINNER, EDITTYPE_FLOAT, IDC_GAMOUNT_EDIT, IDC_GAMOUNT_SPIN, 0.01f,
-		end,
+		p_end,
 	uv_bAmount,	_T("blueAmount"), TYPE_FLOAT, P_ANIMATABLE, IDS_B_AMOUNT,
 		p_default,		1.0f,
 		p_range,		0.0f, 1.0f,
 		p_ui,			TYPE_SPINNER, EDITTYPE_FLOAT, IDC_BAMOUNT_EDIT, IDC_BAMOUNT_SPIN, 0.01f,
-		end,
+		p_end,
 	uv_clampUVW, _T("clampUVW"), TYPE_BOOL, 0, IDS_CLAMPUVW,
 		p_default,		FALSE,
 		p_ui,			TYPE_SINGLECHEKBOX,	IDC_CLAMPUVW,
-		end,
-	end
+		p_end,
+	p_end
 );
 
 UVtex::UVtex() {
@@ -483,10 +502,10 @@ Bitmap* UVtex::BuildBitmap(int size) {
 	return bm;
 }
 
-#if (MAX_RELEASE >= 9000)
-DWORD_PTR UVtex::GetActiveTexHandle(TimeValue t, TexHandleMaker& thmaker) {
-#else
+#if MAX_VERSION_MAJOR < 9	//Max 9
 DWORD UVtex::GetActiveTexHandle(TimeValue t, TexHandleMaker& thmaker) {
+#else
+DWORD_PTR UVtex::GetActiveTexHandle(TimeValue t, TexHandleMaker& thmaker) {
 #endif
 	if (texHandle) {
 		if (texHandleValid.InInterval(t))
@@ -533,11 +552,20 @@ RefTargetHandle UVtex::Clone(RemapDir &remap) {
 	return mnew;
 }
 
+#if MAX_VERSION_MAJOR < 17	//Max 2015
 RefResult UVtex::NotifyRefChanged(
 		Interval changeInt,
 		RefTargetHandle hTarget,
 		PartID& partID,
 		RefMessage message)
+#else
+RefResult UVtex::NotifyRefChanged(
+		const Interval& changeInt,
+		RefTargetHandle hTarget,
+		PartID& partID,
+		RefMessage message,
+		BOOL propagate)
+#endif
 	{
 	switch (message) {
 		case REFMSG_CHANGE:
